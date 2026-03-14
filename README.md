@@ -1,35 +1,26 @@
 # FunnelVision
 
-Audit landing pages and sales funnels with the **FLOW framework**: get a full-page screenshot, element overlays, and AI-powered conversion feedback (OpenAI) on every text, image, and button.
+Landing pages often leak conversion without it being obvious where. FunnelVision runs a page through the FLOW framework and tells you exactly which elements hurt clarity, trust, or willingness to act—with a screenshot, overlays, and concrete fixes.
 
-## Features
+## The problem
 
-- **Scrape** any public URL: full-page screenshot + bounding boxes for text, images, and buttons
-- **FLOW analysis** (OpenAI): each element is scored against four categories:
-  - **Friction** — hidden CTAs, too many steps, form friction
-  - **Legitimacy** — missing proof, weak authority
-  - **Offer Clarity** — jargon, unclear value, buried benefits
-  - **Willingness** — no guarantee, weak urgency, missing FAQs
-- **12 conversion principles** — analysis references simplicity, speed-to-value, contrast, authority, barrier removal, value stacking, scarcity, risk reversal, peer proof, transformation, accessibility, momentum
-- **Inspector** — click or hover any overlay to see element data, issue, fix, and principle-based breakdown
-- **Flow health score** (0–100) and per-category leak counts
+Sales and landing pages fail when they add friction, lack proof, bury the offer, or don’t address risk. Fixing that usually means guesswork or expensive audits. This tool scrapes the page, sends text and CTAs to an LLM, and maps feedback back onto the layout so you can see what to change.
 
-## Tech stack
+## How it works
 
-- **Frontend**: React, Vite, Tailwind CSS, Motion
-- **Server**: Node.js, Express, `tsx`; serves Vite in dev and static build in prod
-- **Scraper**: Python (Playwright), run as a subprocess from the Node server
-- **LLM**: OpenAI API (e.g. `gpt-4o-mini`) for FLOW annotations
+1. You enter a URL and hit **Audit Page**.
+2. A headless browser (Playwright) captures a full-page screenshot and extracts every text block, image, and button.
+3. The Node server sends those elements to OpenAI in batches; the model scores each against FLOW (Friction, Legitimacy, Offer Clarity, Willingness) and the 12 conversion principles.
+4. The UI shows the screenshot with overlays. Click or hover an element to see the Inspector: issue, suggested fix, and which principles apply.
 
-## Prerequisites
+**Flow:** Browser → Node (Express) → Python scraper (screenshot + boxes) → Node → OpenAI → annotations back to the client. No database; scrape and analysis are on demand.
 
-- **Node.js** 18+
-- **Python** 3.12+ (for the scraper)
-- **OpenAI API key** ([platform.openai.com](https://platform.openai.com))
+## What you need
+
+- Node 18+, Python 3.12+, an OpenAI API key
+- Chromium for Playwright: `cd python_scraper && uv run playwright install chromium` (or equivalent with pip)
 
 ## Setup
-
-### 1. Clone and install Node dependencies
 
 ```bash
 git clone https://github.com/dakshmakkar6-code/funnel-vision.git
@@ -37,97 +28,50 @@ cd funnel-vision/frontend
 npm install
 ```
 
-### 2. Python scraper (venv + Playwright)
+Python scraper (from repo root):
 
 ```bash
 cd python_scraper
-uv venv
-uv sync
+uv venv && uv sync
 uv run playwright install chromium
 ```
 
-Or with pip:
-
-```bash
-cd python_scraper
-python -m venv .venv
-.venv\Scripts\activate   # Windows
-# source .venv/bin/activate  # macOS/Linux
-pip install -e .
-playwright install chromium
-```
-
-### 3. Environment variables
-
-```bash
-cd frontend
-cp .env.example .env
-```
-
-Edit `frontend/.env` and set:
-
-```env
-OPENAI_API_KEY=sk-your-openai-api-key
-PORT=3000
-```
-
-Optional: `OPENAI_MODEL`, `LLM_REQUEST_TIMEOUT_MS`, `MAX_ELEMENTS_TO_ANALYZE` (see `.env.example`).
+Copy `frontend/.env.example` to `frontend/.env` and set `OPENAI_API_KEY`. Optionally set `PORT`, `OPENAI_MODEL`, `LLM_REQUEST_TIMEOUT_MS`, `MAX_ELEMENTS_TO_ANALYZE`.
 
 ## Run
-
-**Development**
 
 ```bash
 cd frontend
 npm run dev
 ```
 
-Then open **http://localhost:3000**, enter a landing page URL, and click **Audit Page**.
+Open http://localhost:3000, paste a landing page URL, click **Audit Page**.
 
-**Production build**
+Production: `npm run build` then run the server with `NODE_ENV=production`.
 
-```bash
-cd frontend
-npm run build
-NODE_ENV=production npm run dev
-```
+## FLOW categories
 
-## Project structure
+- **Friction** — CTAs hard to find, too many steps, form friction  
+- **Legitimacy** — Weak or missing proof, authority  
+- **Offer Clarity** — Jargon, unclear value, benefits buried  
+- **Willingness** — No guarantee, weak urgency, no FAQ  
 
-```
-funnel-vision/
-├── frontend/           # Node + React app
-│   ├── server.ts       # Express server, /api/audit, /api/analyze
-│   ├── scraper.ts      # Spawns Python scraper
-│   ├── src/
-│   │   ├── App.tsx     # UI, overlays, Inspector
-│   │   ├── llmClient.ts # OpenAI client, FLOW prompts, batching
-│   │   ├── types.ts
-│   │   └── safeJson.ts
-│   └── .env.example
-├── python_scraper/     # Playwright scraper
-│   ├── scraper_web.py  # Full-page screenshot + text/image/button boxes
-│   └── tests/
-└── docs/               # TESTING.md, PERSISTENCE.md
-```
+The model also ties feedback to principles (simplicity, speed-to-value, contrast, authority, barrier removal, value stacking, scarcity, risk reversal, peer proof, transformation, accessibility, momentum).
 
 ## API
 
-- `POST /api/audit` — body: `{ "url": "https://example.com" }` → scrape result (screenshot URL, boxes, page size)
-- `POST /api/analyze` — body: `{ "url", "scrapeResult" }` → `{ "annotations" }` (FLOW analysis per element)
-- `GET /api/health` → `{ "status": "ok" }`
+- `POST /api/audit` — `{ "url": "https://..." }` → screenshot URL, boxes (text/image/button), page dimensions  
+- `POST /api/analyze` — `{ "url", "scrapeResult" }` → `{ "annotations" }` per element  
+- `GET /api/health` — `{ "status": "ok" }`  
 
-## Testing
+## Tests
 
-**Python (scraper)**
+Scraper tests (from `python_scraper`):
 
 ```bash
-cd python_scraper
 uv run pytest tests/ -v
 ```
 
-Uses the project venv; requires Playwright and Chromium installed.
-
 ## License
 
-Private / unlicensed unless stated otherwise.
+MIT
