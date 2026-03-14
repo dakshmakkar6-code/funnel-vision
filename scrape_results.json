@@ -1,0 +1,921 @@
+{
+  "scrape_page": {
+    "url": "https://katerubybradshaw.com/coaching",
+    "headline": "1:1 with Kate",
+    "buttons": [
+      "DETAILS HERE",
+      "Register to work with me",
+      "REGISTER FOR A 3-MONTH 1:1 PACKAGE",
+      "REGISTER FOR A 6-MONTH 1:1 PACKAGE",
+      "REGISTER FOR A 3-MONTH 1:1 PACKAGE",
+      "REGISTER FOR A 6-MONTH 1:1 PACKAGE",
+      "REGISTER FOR A 3-MONTH 1:1 PACKAGE",
+      "REGISTER FOR A 6-MONTH 1:1 PACKAGE"
+    ],
+    "screenshot_path": "page_screenshots/01_katerubybradshaw_com_coaching_scroll_001.png",
+    "screenshot_paths": [
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_001.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_002.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_003.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_004.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_005.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_006.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_007.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_008.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_009.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_010.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_011.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_012.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_013.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_014.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_015.png",
+      "page_screenshots/01_katerubybradshaw_com_coaching_scroll_016.png"
+    ]
+  },
+  "collect_text_and_button_boxes": {
+    "url": "https://katerubybradshaw.com/coaching",
+    "button_boxes": [],
+    "text_boxes": [
+      {
+        "text": "<img src=\"//static.showit.co/400/NzLkuvHx3rJD6btzhH7Qdg/158279/kate_ruby_bradshaw_3x.png\" class=\"se-img\" alt=\"\" title=\"Kate Ruby Bradshaw@3x\"/>",
+        "x": 10,
+        "y": 13,
+        "width": 212,
+        "height": 73,
+        "type": "text"
+      },
+      {
+        "text": "Menu",
+        "x": 1162,
+        "y": 22,
+        "width": 83,
+        "height": 46,
+        "type": "text"
+      },
+      {
+        "text": "Menu",
+        "x": 1162,
+        "y": 22,
+        "width": 83,
+        "height": 46,
+        "type": "text"
+      },
+      {
+        "text": "About",
+        "x": 444.796875,
+        "y": 29,
+        "width": 89.46875,
+        "height": 36.390625,
+        "type": "text"
+      },
+      {
+        "text": "About",
+        "x": 444.796875,
+        "y": 29,
+        "width": 89.46875,
+        "height": 36.390625,
+        "type": "text"
+      },
+      {
+        "text": "Work With Me\n      \n        1:1 Coaching",
+        "x": 557.0625,
+        "y": 29,
+        "width": 163.1875,
+        "height": 36.390625,
+        "type": "text"
+      },
+      {
+        "text": "Work With Me",
+        "x": 557.0625,
+        "y": 29,
+        "width": 163.1875,
+        "height": 36.390625,
+        "type": "text"
+      },
+      {
+        "text": "1:1 Coaching",
+        "x": 557.0625,
+        "y": 65.390625,
+        "width": 153.71875,
+        "height": 28,
+        "type": "text"
+      },
+      {
+        "text": "1:1 Coaching",
+        "x": 557.0625,
+        "y": 65.390625,
+        "width": 153.71875,
+        "height": 28,
+        "type": "text"
+      },
+      {
+        "text": "Upcoming Events",
+        "x": 743.046875,
+        "y": 29,
+        "width": 196.40625,
+        "height": 36.390625,
+        "type": "text"
+      },
+      {
+        "text": "Upcoming Events",
+        "x": 743.046875,
+        "y": 29,
+        "width": 196.40625,
+        "height": 36.390625,
+        "type": "text"
+      },
+      {
+        "text": "Podcast",
+        "x": 962.25,
+        "y": 29,
+        "width": 112.953125,
+        "height": 36.390625,
+        "type": "text"
+      },
+      {
+        "text": "Podcast",
+        "x": 962.25,
+        "y": 29,
+        "width": 112.953125,
+        "height": 36.390625,
+        "type": "text"
+      },
+      {
+        "text": "1:1 with Kate",
+        "x": 164,
+        "y": 411,
+        "width": 954,
+        "height": 122,
+        "type": "text"
+      },
+      {
+        "text": "This is high-touch 1:1 strategic partnership for established entrepreneurs & leaders",
+        "x": 398,
+        "y": 556,
+        "width": 483,
+        "height": 59,
+        "type": "text"
+      },
+      {
+        "text": "DETAILS HERE",
+        "x": 521,
+        "y": 677,
+        "width": 238,
+        "height": 54,
+        "type": "text"
+      },
+      {
+        "text": "DETAILS HERE",
+        "x": 521,
+        "y": 677,
+        "width": 238,
+        "height": 54,
+        "type": "text"
+      },
+      {
+        "text": "DETAILS HERE",
+        "x": 587.546875,
+        "y": 695.90625,
+        "width": 104.90625,
+        "height": 18.1875,
+        "type": "text"
+      },
+      {
+        "text": "You've built a business that makes money, gets results, and has a good reputation. However, what used to feel like momentum, now feels like a ceiling. Success has created its own trap: you\u2019re the linchpin that everything depends on. You have an assistant or team, yet you\u2019re still in it all. You can carry it (you always have), but you\u2019re starting to realise that even that mindset itself is a key factor preventing the next level of growth.",
+        "x": 130,
+        "y": 795,
+        "width": 1023,
+        "height": 169,
+        "type": "text"
+      },
+      {
+        "text": "That\u2019s where I come in.",
+        "x": 135,
+        "y": 1181,
+        "width": 1013,
+        "height": 57,
+        "type": "text"
+      },
+      {
+        "text": "I don't just see where you're at, I see across the entire landscape of what's going on - both within your business, and within your leadership. I help pinpoint and solve foundational issues, while building a business capable of holding the vision you want. A business that frees you up to operate at the level of leadership and impact you're meant for.",
+        "x": 141,
+        "y": 1273,
+        "width": 530,
+        "height": 248,
+        "type": "text"
+      },
+      {
+        "text": "Hear from some of my phenomenal clients...",
+        "x": 141,
+        "y": 1625,
+        "width": 738,
+        "height": 39,
+        "type": "text"
+      },
+      {
+        "text": "Erica McCreedy",
+        "x": 525,
+        "y": 1787,
+        "width": 589,
+        "height": 76,
+        "type": "text"
+      },
+      {
+        "text": "Chief Operating Officer",
+        "x": 525,
+        "y": 1874,
+        "width": 211.0625,
+        "height": 38.796875,
+        "type": "text"
+      },
+      {
+        "text": "Nominated to represent the Oceania region on the International Union for Conservation of Nature (IUCN) Council",
+        "x": 525,
+        "y": 1915.59375,
+        "width": 594.8125,
+        "height": 38.796875,
+        "type": "text"
+      },
+      {
+        "text": "At the start of our work together, Erica was working well below her capacity. Over and over we stripped back the noise and refocused her energy on the levers that matter.\u00a0Her work and voice now carry global significance, including with forums such as COP and United Nations, as well as her current nomination to represent the Oceania region on the International Union for Conservation of Nature (IUCN) Council.\u00a0Erica and I continue to work together with my coaching role adapting to meet her at each new level she finds herself.",
+        "x": 525,
+        "y": 1988,
+        "width": 594,
+        "height": 370,
+        "type": "text"
+      },
+      {
+        "text": "Katie Godden",
+        "x": 132,
+        "y": 2525,
+        "width": 589,
+        "height": 76,
+        "type": "text"
+      },
+      {
+        "text": "Redesigned her business model",
+        "x": 710.796875,
+        "y": 2670.5625,
+        "width": 441.203125,
+        "height": 26.390625,
+        "type": "text"
+      },
+      {
+        "text": "Repositioned her in the marketplace as a leading expert",
+        "x": 710.796875,
+        "y": 2696.953125,
+        "width": 441.203125,
+        "height": 52.78125,
+        "type": "text"
+      },
+      {
+        "text": "Established her Communication IP",
+        "x": 710.796875,
+        "y": 2749.734375,
+        "width": 441.203125,
+        "height": 26.390625,
+        "type": "text"
+      },
+      {
+        "text": "7X her launch size",
+        "x": 710.796875,
+        "y": 2776.125,
+        "width": 441.203125,
+        "height": 26.390625,
+        "type": "text"
+      },
+      {
+        "text": "7X her launch size",
+        "x": 712.984375,
+        "y": 2773.125,
+        "width": 201.53125,
+        "height": 31,
+        "type": "text"
+      },
+      {
+        "text": "Expanded into the contract space: Signed her first high-level contract + established a robust service evaluation plan to set the foundations for even larger contracts next.",
+        "x": 710.796875,
+        "y": 2802.515625,
+        "width": 441.203125,
+        "height": 131.953125,
+        "type": "text"
+      },
+      {
+        "text": "Amy Mclean",
+        "x": 563,
+        "y": 3223,
+        "width": 589,
+        "height": 76,
+        "type": "text"
+      },
+      {
+        "text": "Founder of Te Mana o Ng\u0101 W\u0101hine (a premium annual event for W\u0101hine M\u0101ori) and Te K\u0101inga W\u0101hine",
+        "x": 563,
+        "y": 3316,
+        "width": 527.65625,
+        "height": 38.796875,
+        "type": "text"
+      },
+      {
+        "text": "\u201cI\u2019ve worked with a number of coaches over the years in business, and Kate is certainly at a level of coaching that I don't think I've experienced with anyone else.\u201d",
+        "x": 568,
+        "y": 3458,
+        "width": 527,
+        "height": 163,
+        "type": "text"
+      },
+      {
+        "text": "Here are four more client stories\u2026",
+        "x": 105,
+        "y": 4135,
+        "width": 672,
+        "height": 48,
+        "type": "text"
+      },
+      {
+        "text": "Shifts at these levels, require both strategy and inner growth.\u00a0 I work at the intersection of business strategy, leadership evolution, and high-performance execution, supporting the success of many industry leaders you might know, work with, or admire.",
+        "x": 110,
+        "y": 3920,
+        "width": 1059,
+        "height": 165,
+        "type": "text"
+      },
+      {
+        "text": "Note: Each of my clients has very different needs.\u00a0 I\u2019ve included these particular client examples (above and below) to give a sense of the spectrum of challenges I work across",
+        "x": 105,
+        "y": 4222,
+        "width": 967,
+        "height": 63,
+        "type": "text"
+      },
+      {
+        "text": "[MEET ANNA] Signed a milestone $15,000,000 contract...",
+        "x": 122,
+        "y": 4331,
+        "width": 992,
+        "height": 31,
+        "type": "text"
+      },
+      {
+        "text": "[MEET KARLIE] Redesigned her business model for scalability...",
+        "x": 122,
+        "y": 4392,
+        "width": 992,
+        "height": 31,
+        "type": "text"
+      },
+      {
+        "text": "[MEET SYLVIE] Transformed team communications & optimised processes",
+        "x": 122,
+        "y": 4453,
+        "width": 992,
+        "height": 31,
+        "type": "text"
+      },
+      {
+        "text": "[MEET AMY] Owning her leadership at a national level...",
+        "x": 125,
+        "y": 4513,
+        "width": 992,
+        "height": 31,
+        "type": "text"
+      },
+      {
+        "text": "Here's how we\u2019ll work together",
+        "x": 110,
+        "y": 5173,
+        "width": 1062,
+        "height": 216,
+        "type": "text"
+      },
+      {
+        "text": "Working with me at this level means highly individualised, one-to-one support. I\u2019ll meet you where you are and provide exactly what you need at every step. As you grow and your needs evolve, I\u2019ll be right there alongside you.",
+        "x": 106,
+        "y": 5462,
+        "width": 1064,
+        "height": 110,
+        "type": "text"
+      },
+      {
+        "text": "We\u2019ll begin with a three or six month term",
+        "x": 122,
+        "y": 5634,
+        "width": 992,
+        "height": 31,
+        "type": "text"
+      },
+      {
+        "text": "You\u2019ll complete a comprehensive intake form",
+        "x": 122,
+        "y": 5695,
+        "width": 992,
+        "height": 31,
+        "type": "text"
+      },
+      {
+        "text": "90-Minute Business Strategy & Alignment Session",
+        "x": 122,
+        "y": 5756,
+        "width": 992,
+        "height": 31,
+        "type": "text"
+      },
+      {
+        "text": "60-Minute Private Strategy Sessions (Fortnightly)",
+        "x": 122,
+        "y": 5817,
+        "width": 992,
+        "height": 31,
+        "type": "text"
+      },
+      {
+        "text": "Weekday Voice & Text Coaching Support",
+        "x": 122,
+        "y": 5878,
+        "width": 992,
+        "height": 31,
+        "type": "text"
+      },
+      {
+        "text": "Strategic Resources & Bespoke Support",
+        "x": 122,
+        "y": 5939,
+        "width": 992,
+        "height": 31,
+        "type": "text"
+      },
+      {
+        "text": "High-Impact Asset Reviews",
+        "x": 122,
+        "y": 6000,
+        "width": 992,
+        "height": 31,
+        "type": "text"
+      },
+      {
+        "text": "Register to work with me",
+        "x": 440,
+        "y": 6101,
+        "width": 401,
+        "height": 54,
+        "type": "text"
+      },
+      {
+        "text": "Register to work with me",
+        "x": 440,
+        "y": 6101,
+        "width": 401,
+        "height": 54,
+        "type": "text"
+      },
+      {
+        "text": "Register to work with me",
+        "x": 528.578125,
+        "y": 6119.90625,
+        "width": 223.828125,
+        "height": 18.1875,
+        "type": "text"
+      },
+      {
+        "text": "About",
+        "x": 114,
+        "y": 6310,
+        "width": 325,
+        "height": 117,
+        "type": "text"
+      },
+      {
+        "text": "I work at the intersection of business strategy, leadership evolution, and high-performance execution, supporting the success of many industry leaders you might know, work with, or admire.I have a diverse and extensive skillset \u2014 developed and honed through 15 years of growing and supporting businesses in the online space, multiple government contracts, coaching high-profile industry leaders and senior executives, running hundreds of in-person workshops and large-scale global events, and over a decade as a senior leadership trainer.From a coaching perspective, I\u2019ve been coaching since 2010. After thousands of sessions, I\u2019m highly skilled at zeroing in on the one thing that\u2019s most needed to move the needle for you. I can read the complexities and nuances of the landscape you\u2019re operating in and provide the strategic insight and support that drives real results.This depth of experience, paired with a strong intuitive approach, allows me to provide the level of guidance, coaching, and partnership you\u2019re truly looking for.",
+        "x": 114,
+        "y": 6542,
+        "width": 584,
+        "height": 461,
+        "type": "text"
+      },
+      {
+        "text": "Kate Ruby Bradshaw",
+        "x": 102,
+        "y": 6440,
+        "width": 594,
+        "height": 81,
+        "type": "text"
+      },
+      {
+        "text": "If you\u2019d like to chat before signing up, send me a message on Instagram, Facebook, or email support@katerubybradshaw.comWe\u2019ll talk about where you\u2019re at and make sure it\u2019s the right fit for us both.",
+        "x": 328,
+        "y": 7834,
+        "width": 624,
+        "height": 118,
+        "type": "text"
+      },
+      {
+        "text": "Instagram",
+        "x": 856.3125,
+        "y": 7833,
+        "width": 88.453125,
+        "height": 24,
+        "type": "text"
+      },
+      {
+        "text": "Facebook",
+        "x": 414.015625,
+        "y": 7855.09375,
+        "width": 82.9375,
+        "height": 24,
+        "type": "text"
+      },
+      {
+        "text": "Investment: $1850 AUD monthly, with a minimum commitment of 3 months.Full Pay discount available",
+        "x": 196,
+        "y": 7353,
+        "width": 888,
+        "height": 73,
+        "type": "text"
+      },
+      {
+        "text": "Investment",
+        "x": 362,
+        "y": 7198,
+        "width": 558,
+        "height": 117,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 3-MONTH 1:1 PACKAGE",
+        "x": 240,
+        "y": 7741,
+        "width": 371,
+        "height": 19,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 3-MONTH 1:1 PACKAGE",
+        "x": 240,
+        "y": 7741,
+        "width": 371,
+        "height": 19,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 6-MONTH 1:1 PACKAGE",
+        "x": 669,
+        "y": 7741,
+        "width": 374,
+        "height": 21,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 6-MONTH 1:1 PACKAGE",
+        "x": 669,
+        "y": 7741,
+        "width": 374,
+        "height": 21,
+        "type": "text"
+      },
+      {
+        "text": "Full Pay Options",
+        "x": 541,
+        "y": 7656,
+        "width": 198,
+        "height": 28,
+        "type": "text"
+      },
+      {
+        "text": "Monthly Pay Options",
+        "x": 516,
+        "y": 7472,
+        "width": 249,
+        "height": 28,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 3-MONTH 1:1 PACKAGE",
+        "x": 240,
+        "y": 7557,
+        "width": 371,
+        "height": 19,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 3-MONTH 1:1 PACKAGE",
+        "x": 240,
+        "y": 7557,
+        "width": 371,
+        "height": 19,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 6-MONTH 1:1 PACKAGE",
+        "x": 669,
+        "y": 7557,
+        "width": 374,
+        "height": 21,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 6-MONTH 1:1 PACKAGE",
+        "x": 669,
+        "y": 7557,
+        "width": 374,
+        "height": 21,
+        "type": "text"
+      },
+      {
+        "text": "\"I feel so supported by Kate. She's a very generous person, a very genuine person and she truly wants the best for everybody\"",
+        "x": 173,
+        "y": 8857,
+        "width": 594,
+        "height": 94,
+        "type": "text"
+      },
+      {
+        "text": "Karlie McKeand - Founder of ERT",
+        "x": 173,
+        "y": 8987,
+        "width": 459,
+        "height": 22,
+        "type": "text"
+      },
+      {
+        "text": "\"With other mentors, I\u2019ve felt like just another number, but with Kate, I feel like a person. She\u2019s so invested in me and my growth.\"",
+        "x": 173,
+        "y": 8180,
+        "width": 594,
+        "height": 61,
+        "type": "text"
+      },
+      {
+        "text": "Marissa Lewis - Business and Success Coach",
+        "x": 173,
+        "y": 8284,
+        "width": 459,
+        "height": 22,
+        "type": "text"
+      },
+      {
+        "text": "\"When Ive got overwhelmed with issues within my organisation, being able to jump on a call with Kate and have her lift me out of the slosh and muck has allowed me to move bits of the puzzle which has then gone onto have this massive flow on effect for all aspects of my organisation\"",
+        "x": 173,
+        "y": 9173,
+        "width": 594,
+        "height": 177,
+        "type": "text"
+      },
+      {
+        "text": "Emma Sullings - National Charity Founder",
+        "x": 173,
+        "y": 9370,
+        "width": 459,
+        "height": 22,
+        "type": "text"
+      },
+      {
+        "text": "\"Working with Kate has been the most expansive and immediately successful experience I\u2019ve ever had. Nothing has impacted me at the level that working with Kate has.\"",
+        "x": 173,
+        "y": 8491,
+        "width": 594,
+        "height": 121,
+        "type": "text"
+      },
+      {
+        "text": "Aubrey Taylor - Founder of Youth for Freedom",
+        "x": 173,
+        "y": 8635,
+        "width": 459,
+        "height": 22,
+        "type": "text"
+      },
+      {
+        "text": "I\u2019ll guide you in the strategic moves your business or organisation needs to make, and the internal shifts required to lead from there, walking alongside you each step of the way.",
+        "x": 169,
+        "y": 9718,
+        "width": 913,
+        "height": 126,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 3-MONTH 1:1 PACKAGE",
+        "x": 240,
+        "y": 10214,
+        "width": 371,
+        "height": 19,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 3-MONTH 1:1 PACKAGE",
+        "x": 240,
+        "y": 10214,
+        "width": 371,
+        "height": 19,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 6-MONTH 1:1 PACKAGE",
+        "x": 669,
+        "y": 10214,
+        "width": 374,
+        "height": 21,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 6-MONTH 1:1 PACKAGE",
+        "x": 669,
+        "y": 10214,
+        "width": 374,
+        "height": 21,
+        "type": "text"
+      },
+      {
+        "text": "Full Pay Options",
+        "x": 541,
+        "y": 10101,
+        "width": 198,
+        "height": 28,
+        "type": "text"
+      },
+      {
+        "text": "Monthly Pay Options",
+        "x": 509,
+        "y": 9894,
+        "width": 232,
+        "height": 28,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 3-MONTH 1:1 PACKAGE",
+        "x": 240,
+        "y": 10002,
+        "width": 371,
+        "height": 19,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 3-MONTH 1:1 PACKAGE",
+        "x": 240,
+        "y": 10002,
+        "width": 371,
+        "height": 19,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 6-MONTH 1:1 PACKAGE",
+        "x": 669,
+        "y": 10002,
+        "width": 374,
+        "height": 21,
+        "type": "text"
+      },
+      {
+        "text": "REGISTER FOR A 6-MONTH 1:1 PACKAGE",
+        "x": 669,
+        "y": 10002,
+        "width": 374,
+        "height": 21,
+        "type": "text"
+      },
+      {
+        "text": "Freebie",
+        "x": 342,
+        "y": 10448,
+        "width": 141,
+        "height": 41,
+        "type": "text"
+      },
+      {
+        "text": "Navigation",
+        "x": 120,
+        "y": 10448,
+        "width": 118,
+        "height": 28,
+        "type": "text"
+      },
+      {
+        "text": "Business BoundariesCommunication",
+        "x": 340,
+        "y": 10530,
+        "width": 266,
+        "height": 48,
+        "type": "text"
+      },
+      {
+        "text": "Business Boundaries",
+        "x": 340,
+        "y": 10530,
+        "width": 174.046875,
+        "height": 24,
+        "type": "text"
+      },
+      {
+        "text": "Communication",
+        "x": 340,
+        "y": 10555.5,
+        "width": 138.921875,
+        "height": 24,
+        "type": "text"
+      },
+      {
+        "text": "HomepageAbout1-1 CoachingPodcast",
+        "x": 120,
+        "y": 10530,
+        "width": 126,
+        "height": 97,
+        "type": "text"
+      },
+      {
+        "text": "Homepage",
+        "x": 120,
+        "y": 10530,
+        "width": 95.71875,
+        "height": 24,
+        "type": "text"
+      },
+      {
+        "text": "About",
+        "x": 120,
+        "y": 10555.5,
+        "width": 50.90625,
+        "height": 24,
+        "type": "text"
+      },
+      {
+        "text": "1-1 Coaching",
+        "x": 120,
+        "y": 10581,
+        "width": 108.046875,
+        "height": 24,
+        "type": "text"
+      },
+      {
+        "text": "Podcast",
+        "x": 120,
+        "y": 10606.5,
+        "width": 69.09375,
+        "height": 24,
+        "type": "text"
+      },
+      {
+        "text": "@KateRubyBradshaw",
+        "x": 367,
+        "y": 10671,
+        "width": 234,
+        "height": 42,
+        "type": "text"
+      },
+      {
+        "text": "@KateRubyBradshaw",
+        "x": 371.859375,
+        "y": 10672,
+        "width": 224.265625,
+        "height": 25,
+        "type": "text"
+      },
+      {
+        "text": "Terms & Conditions | Privacy Policy\u00a0|\u00a0Contact",
+        "x": 310,
+        "y": 10997,
+        "width": 660,
+        "height": 21,
+        "type": "text"
+      },
+      {
+        "text": "Terms & Conditions",
+        "x": 424.140625,
+        "y": 10999,
+        "width": 172.6875,
+        "height": 18,
+        "type": "text"
+      },
+      {
+        "text": "Privacy Policy",
+        "x": 625.609375,
+        "y": 10999,
+        "width": 134.3125,
+        "height": 18,
+        "type": "text"
+      },
+      {
+        "text": "Contact",
+        "x": 788.703125,
+        "y": 10999,
+        "width": 67.15625,
+        "height": 18,
+        "type": "text"
+      },
+      {
+        "text": "Branding & Website by Bailey Rose Creative",
+        "x": 310,
+        "y": 10961,
+        "width": 660,
+        "height": 21,
+        "type": "text"
+      },
+      {
+        "text": "Bailey Rose Creative",
+        "x": 649.59375,
+        "y": 10963,
+        "width": 191.875,
+        "height": 18,
+        "type": "text"
+      }
+    ]
+  }
+}
