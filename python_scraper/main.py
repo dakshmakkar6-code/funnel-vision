@@ -10,13 +10,13 @@ if str(CURRENT_DIR) not in sys.path:
     sys.path.insert(0, str(CURRENT_DIR))
 
 try:
-    from scraper import scrape_page, collect_text_and_button_boxes
-    from report_generator import generate_teardown_report
+    from scraper import scrape_page, collect_text_and_button_boxes  # type: ignore[import-not-found]
+    from report_generator import generate_teardown_report  # type: ignore[import-not-found]
 except ImportError:
     # Fallback for some IDE environments
     sys.path.append(str(CURRENT_DIR))
-    from scraper import scrape_page, collect_text_and_button_boxes
-    from report_generator import generate_teardown_report
+    from scraper import scrape_page, collect_text_and_button_boxes  # type: ignore[import-not-found]
+    from report_generator import generate_teardown_report  # type: ignore[import-not-found]
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

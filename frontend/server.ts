@@ -2,10 +2,14 @@ import express from "express";
 import { createServer as createViteServer } from "vite";
 import path from "path";
 import { fileURLToPath } from "url";
+import Groq from "groq-sdk";
 import { scrapePage } from "./scraper.js";
 
 // ESM-safe __dirname
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Initialize Groq client (server-side only, key never exposed to browser)
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 async function startServer() {
   const app = express();
@@ -26,6 +30,7 @@ async function startServer() {
     res.json({ status: "ok" });
   });
 
+  // Scrape the page and return raw data
   app.post("/api/audit", async (req: express.Request, res: express.Response) => {
     const { url } = req.body as { url?: string };
 
@@ -34,14 +39,81 @@ async function startServer() {
     }
 
     try {
-      console.log(`[server] Auditing: ${url}`);
+      console.log(`[server] Scraping: ${url}`);
       const scrapeResult = await scrapePage(url.trim());
       res.json({ status: "success", data: scrapeResult });
     } catch (error: any) {
-      console.error("[server] Audit failed:", error?.message ?? error);
+      console.error("[server] Scrape failed:", error?.message ?? error);
       res
         .status(500)
         .json({ error: "Failed to scrape page", details: error?.message ?? String(error) });
+    }
+  });
+
+  // Analyze scraped data with Groq (AI analysis, server-side)
+  app.post("/api/analyze", async (req: express.Request, res: express.Response) => {
+    const { url, boxes } = req.body as { url?: string; boxes?: any[] };
+
+    if (!url || !boxes) {
+      return res.status(400).json({ error: "url and boxes are required" });
+    }
+
+    // Build text summary of scraped elements for Groq
+    const boxesText = boxes
+      .map((b: any, i: number) => {
+        let details = `[Box ${i}] (${b.type} - <${b.tagName}>): `;
+        if (b.text) details += `Text: "${String(b.text).substring(0, 100)}${b.text.length > 100 ? "..." : ""}" `;
+        if (b.src) details += `Src: "${b.src}" `;
+        if (b.backgroundImage) details += `BgImage: "${b.backgroundImage}" `;
+        return details.trim();
+      })
+      .join("\n");
+
+    const systemPrompt = `You are the "FunnelVision Architect," a specialized AI agent for high-conversion sales funnel auditing using the FLOW Framework (Friction, Legitimacy, Offer Clarity, Willingness).
+
+The FLOW Heuristics:
+1. Friction (F): CTA visibility, confusing navigation, poor form fields, distracting backgrounds.
+2. Legitimacy (L): Authority markers, testimonials, trust badges, specific claims without proof.
+3. Offer Clarity (O): Clear transformation, jargon, ICA visibility, image support.
+4. Willingness (W): Risk reversal, guarantees, FAQs, refund policies.
+
+You MUST respond ONLY with valid JSON matching this exact structure:
+{
+  "annotations": [
+    {
+      "boxIndex": <integer>,
+      "exact_quote": "<string>",
+      "category": "<Friction|Legitimacy|Offer Clarity|Willingness>",
+      "issue_description": "<string>",
+      "actionable_improvement": "<string>"
+    }
+  ]
+}
+Provide 8-12 high-impact annotations. No markdown, no explanation outside JSON.`;
+
+    const userPrompt = `Analyze conversion leaks on landing page: ${url}\n\nExtracted elements:\n${boxesText}`;
+
+    try {
+      console.log("[server] Running Groq analysis...");
+      const completion = await groq.chat.completions.create({
+        model: "llama-3.3-70b-versatile",
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt },
+        ],
+        response_format: { type: "json_object" },
+        temperature: 0.4,
+        max_tokens: 4096,
+      });
+
+      const text = completion.choices[0]?.message?.content ?? "";
+      const parsed = JSON.parse(text);
+      res.json({ status: "success", data: parsed });
+    } catch (error: any) {
+      console.error("[server] Groq analysis failed:", error?.message ?? error);
+      res
+        .status(500)
+        .json({ error: "AI analysis failed", details: error?.message ?? String(error) });
     }
   });
 

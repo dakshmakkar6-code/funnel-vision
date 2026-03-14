@@ -29,7 +29,8 @@ async def scrape_page(url: str):
         public_dir.mkdir(parents=True, exist_ok=True)
         
         # Create a safe filename based on the URL
-        safe_name: str = "".join(c if c.isalnum() else "_" for c in url)[:30]
+        safe_chars = "".join(c if c.isalnum() else "_" for c in url)
+        safe_name = safe_chars[:30]
         screenshot_filename = f"screenshot-{safe_name}.png"
         screenshot_path = public_dir / screenshot_filename
         

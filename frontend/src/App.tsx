@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { GoogleGenAI, Type } from '@google/genai';
 import { 
   Activity, 
   AlertTriangle, 
@@ -20,8 +19,6 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-// Initialize Gemini API
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 // --- Types ---
 type FlowCategory = 'Friction' | 'Legitimacy' | 'Offer Clarity' | 'Willingness';
@@ -154,86 +151,23 @@ export default function App() {
       const scraped = scrapeData.data as ScrapeResult;
       setScrapeResult(scraped);
 
-      // 2. Analyze with Gemini
-      const boxesText = scraped.boxes.map((b, i) => {
-        let details = `[Box ${i}] (${b.type} - <${b.tagName}>): `;
-        if (b.text) details += `Text: "${b.text.substring(0, 100)}${b.text.length > 100 ? '...' : ''}" `;
-        if (b.src) details += `Src: "${b.src}" `;
-        if (b.backgroundImage) details += `BgImage: "${b.backgroundImage}" `;
-        return details.trim();
-      }).join('\n');
-      
-      const prompt = `
-You are the "FunnelVision Architect," a specialized AI agent designed for high-conversion sales funnel auditing. You use the proprietary FLOW Framework (Friction, Legitimacy, Offer Clarity, Willingness) to diagnose why online businesses are failing to convert visitors into customers.
-
-Context:
-I have scraped the landing page URL: ${url}
-Here are the extracted elements (text, buttons, images, inputs, backgrounds) with their assigned Box IDs:
-${boxesText}
-
-Your task is to analyze these elements and annotate specific boxes that need improvement based on the FLOW framework. You can annotate ANY type of element (e.g., a confusing background image, a missing trust badge image, a poorly worded text block, a friction-heavy form input, or a weak CTA button).
-
-The FLOW Heuristics:
-1. Friction (F): Check CTA visibility, number of steps, confusing navigation, poor form fields, distracting background images.
-2. Legitimacy (L): Look for authority markers, testimonials, founder credentials, specific claims without proof, missing trust badges.
-3. Offer Clarity (O): Check for a clear transformation. Is it jargon-heavy? Is the Ideal Customer Avatar (ICA) obvious? Do the images support the offer?
-4. Willingness (W): Scan for risk reversal—guarantees, FAQs, refund policies, next-step transparency.
-
-Output Requirements:
-1. \`annotations\`: Identify specific problematic boxes. 
-   - \`boxIndex\` MUST be the integer ID of the box you are annotating.
-   - Assign one of the four FLOW categories.
-   - Provide a brutal \`issue_description\`.
-   - Provide an \`actionable_improvement\` (e.g., a rewritten headline, a suggested image change, or a form field removal).
-   - \`exact_quote\`: If it's text, quote the text. If it's an image/background/form, describe the element (e.g., "Hero Background Image" or "Email Input Field").
-   - Provide a maximum of 8-12 highly impactful annotations.
-`;
-
-      const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-lite',
-        contents: prompt,
-        config: {
-          responseMimeType: 'application/json',
-          responseSchema: {
-            type: Type.OBJECT,
-            properties: {
-              annotations: {
-                type: Type.ARRAY,
-                items: {
-                  type: Type.OBJECT,
-                  properties: {
-                    boxIndex: { type: Type.INTEGER },
-                    exact_quote: { type: Type.STRING },
-                    category: { 
-                      type: Type.STRING, 
-                      description: "Must be one of: Friction, Legitimacy, Offer Clarity, Willingness"
-                    },
-                    issue_description: { type: Type.STRING },
-                    actionable_improvement: { type: Type.STRING }
-                  },
-                  required: ["boxIndex", "exact_quote", "category", "issue_description", "actionable_improvement"]
-                }
-              }
-            },
-            required: ["annotations"]
-          }
-        }
+      // 2. Analyze with Groq (server-side)
+      const analyzeRes = await fetch('/api/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url, boxes: scraped.boxes })
       });
 
-      const text = response.text;
-      if (text) {
-        try {
-          const parsed = JSON.parse(text);
-          setResult({ page_sections: [], annotations: parsed.annotations });
-        } catch (parseError: any) {
-          console.error("Failed to parse JSON:", text);
-          throw new Error("AI returned invalid JSON format.");
-        }
-      } else {
-        const finishReason = response.candidates?.[0]?.finishReason;
-        console.error("AI Response:", JSON.stringify(response, null, 2));
-        throw new Error(`No response from AI. Finish reason: ${finishReason || 'Unknown'}`);
+      const analyzeData = await analyzeRes.json();
+      if (!analyzeRes.ok) {
+        throw new Error(analyzeData.error || 'AI analysis failed');
       }
+
+      const parsed = analyzeData.data;
+      if (!parsed?.annotations) {
+        throw new Error('AI returned unexpected format.');
+      }
+      setResult({ page_sections: [], annotations: parsed.annotations });
     } catch (err: any) {
       console.error(err);
       setError(err.message || "An error occurred during the audit.");

@@ -1,9 +1,15 @@
 import asyncio
 import json
+import sys
 from pathlib import Path
 
-from scraper import scrape_page
-from scraper import collect_text_and_button_boxes
+# Add python_scraper directory to path so local modules resolve
+PYTHON_SCRAPER_DIR = Path(__file__).resolve().parent / "python_scraper"
+if str(PYTHON_SCRAPER_DIR) not in sys.path:
+    sys.path.insert(0, str(PYTHON_SCRAPER_DIR))
+
+from scraper import scrape_page  # type: ignore[import-not-found]
+from scraper import collect_text_and_button_boxes  # type: ignore[import-not-found]
 
 
 async def main() -> None:
@@ -22,4 +28,3 @@ async def main() -> None:
 
 if __name__ == "__main__":
 	asyncio.run(main())
-
