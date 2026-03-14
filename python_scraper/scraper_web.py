@@ -22,7 +22,7 @@ from pathlib import Path
 from playwright.async_api import async_playwright
 
 SCRIPT_DIR = Path(__file__).parent
-SCREENSHOTS_DIR = SCRIPT_DIR / "page_screenshots"
+SCREENSHOTS_DIR = SCRIPT_DIR.parent / "frontend" / "public" / "screenshots"
 
 EXTRACT_JS = """
 () => {

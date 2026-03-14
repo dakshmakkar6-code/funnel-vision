@@ -10,7 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // python_scraper lives one level up from frontend/
 const PYTHON_EXE = path.resolve(__dirname, '../python_scraper/.venv/Scripts/python.exe');
-const SCRAPER_SCRIPT = path.resolve(__dirname, './python_scripts/scraper_agentql.py');
+const SCRAPER_SCRIPT = path.resolve(__dirname, '../python_scraper/scraper_web.py');
 
 export async function scrapePage(url: string) {
   console.log(`[scraper] Running: ${PYTHON_EXE} ${SCRAPER_SCRIPT} "${url}"`);
