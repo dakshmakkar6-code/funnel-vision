@@ -1,9 +1,6 @@
-import { exec } from 'child_process';
-import util from 'util';
+import { spawn } from 'child_process';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
-const execAsync = util.promisify(exec);
 
 // Resolve paths relative to this file (ESM-safe)
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -13,33 +10,41 @@ const PYTHON_EXE = path.resolve(__dirname, '../python_scraper/.venv/Scripts/pyth
 const SCRAPER_SCRIPT = path.resolve(__dirname, '../python_scraper/scraper_web.py');
 
 export async function scrapePage(url: string) {
-  console.log(`[scraper] Running: ${PYTHON_EXE} ${SCRAPER_SCRIPT} "${url}"`);
+  console.log(`[scraper] Spawning: ${PYTHON_EXE} ${SCRAPER_SCRIPT} "${url}"`);
+  
+  return new Promise((resolve, reject) => {
+    const pyProcess = spawn(PYTHON_EXE, [SCRAPER_SCRIPT, url]);
+    let stdout = '';
+    let stderr = '';
 
-  try {
-    const { stdout, stderr } = await execAsync(
-      `"${PYTHON_EXE}" "${SCRAPER_SCRIPT}" "${url}"`,
-      { timeout: 90_000 }  // 90-second hard limit
-    );
+    pyProcess.stdout.on('data', (data) => {
+      stdout += data.toString();
+    });
 
-    if (stderr) {
-      // Playwright logs to stderr – only warn, don't throw
-      console.warn('[scraper] Python stderr (non-fatal):', stderr.substring(0, 500));
-    }
+    pyProcess.stderr.on('data', (data) => {
+      stderr += data.toString();
+    });
 
-    const trimmed = stdout.trim();
-    if (!trimmed) {
-      throw new Error('Python scraper produced no output. Check that the URL is reachable.');
-    }
+    pyProcess.on('close', (code) => {
+      if (code !== 0) {
+        console.error(`[scraper] Python exited with code ${code}`);
+        console.error(`[scraper] Stderr: ${stderr}`);
+        return reject(new Error(stderr || `Python script exited with code ${code}`));
+      }
 
-    const result = JSON.parse(trimmed);
-
-    if (result.error) {
-      throw new Error(`Python scraper error: ${result.error}`);
-    }
-
-    return result;
-  } catch (error: any) {
-    console.error('[scraper] Failed:', error?.message ?? error);
-    throw error;
-  }
+      try {
+        // Find JSON in the stdout (handles potential noise)
+        const jsonMatch = stdout.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) {
+          throw new Error('No valid JSON found in scraper output');
+        }
+        const data = JSON.parse(jsonMatch[0]);
+        resolve(data);
+      } catch (err: any) {
+        console.error('[scraper] Output Parser error:', err.message);
+        console.error('[scraper] Raw stdout:', stdout);
+        reject(new Error(`Failed to parse scraper data: ${err.message}`));
+      }
+    });
+  });
 }

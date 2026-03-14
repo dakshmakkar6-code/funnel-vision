@@ -1,18 +1,3 @@
-"""
-scraper_web.py
---------------
-Playwright-based web scraper that returns data in the format expected by the
-FunnelVision React frontend (App.tsx).
-
-Output JSON schema:
-{
-  "screenshotUrl": "/screenshots/<filename>.png",
-  "boxes": [ { type, tagName, text, x, y, width, height, fontSize, fontWeight, color, backgroundColor, backgroundImage?, src? } ],
-  "pageHeight": int,
-  "pageWidth": int
-}
-"""
-
 import sys
 import json
 import asyncio
@@ -126,7 +111,7 @@ async def scrape(url: str) -> dict:
         await page.set_viewport_size({"width": min(page_width, 1440), "height": capped_height})
         await page.wait_for_timeout(500)
 
-        url_hash = hashlib.md5(url.encode()).hexdigest()[:8]  # type: ignore
+        url_hash = hashlib.md5(url.encode()).hexdigest()[:8]
         screenshot_filename = f"web_{url_hash}.png"
         screenshot_path = SCREENSHOTS_DIR / screenshot_filename
         await page.screenshot(path=str(screenshot_path), full_page=True)
@@ -144,7 +129,7 @@ async def scrape(url: str) -> dict:
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print(json.dumps({"error": "URL argument required. Usage: python scraper_web.py <url>"}))
+        print(json.dumps({"error": "URL argument required."}))
         sys.exit(1)
 
     target_url = sys.argv[1]
