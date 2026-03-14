@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from "express";
 import { createServer as createViteServer } from "vite";
 import path from "path";
@@ -8,12 +9,13 @@ import { scrapePage } from "./scraper.js";
 // ESM-safe __dirname
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Initialize Groq client (server-side only, key never exposed to browser)
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 async function startServer() {
   const app = express();
   const PORT = Number(process.env.PORT) || 3000;
+
+  // Groq client — instantiated here so dotenv is already loaded
+  const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
   app.use(express.json());
 
