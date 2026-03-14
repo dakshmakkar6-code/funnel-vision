@@ -42,12 +42,15 @@ async def scrape_page(target_url: str | list[str]) -> dict:
                 for scroll_index, y in enumerate(y_positions, start=1):
                     await page.evaluate("(scrollY) => window.scrollTo(0, scrollY)", y)
                     await page.wait_for_timeout(250)
-                    screenshot_path = _build_screenshot_path(url, index, scroll_index)
-                    await page.screenshot(path=str(screenshot_path), full_page=False)
-                    screenshot_paths.append(str(screenshot_path))
 
+                # Reset to top, capture a SINGLE perfect whole-page screenshot
                 await page.evaluate("window.scrollTo(0, 0)")
-                primary_screenshot_path = screenshot_paths[0] if screenshot_paths else str(_build_screenshot_path(url, index))
+                await page.wait_for_timeout(250)
+                
+                screenshot_path = str(_build_screenshot_path(url, index))
+                await page.screenshot(path=screenshot_path, full_page=True)
+                primary_screenshot_path = screenshot_path
+                screenshot_paths = [screenshot_path]
 
                 agentql_page = await agentql.wrap_async(page)
                 data = await agentql_page.query_data(
@@ -102,9 +105,20 @@ async def collect_text_and_button_boxes(target_url: str | list[str]) -> dict:
                 button_count = await button_locator.count()
                 for i in range(button_count):
                     el = button_locator.nth(i)
-                    box = await el.bounding_box()
+                    if not await el.is_visible():
+                        continue
+                        
+                    box = await el.evaluate("""(node) => {
+                        const rect = node.getBoundingClientRect();
+                        return {
+                            x: rect.x + window.scrollX,
+                            y: rect.y + window.scrollY,
+                            width: rect.width,
+                            height: rect.height
+                        };
+                    }""")
                     text = (await el.text_content() or "").strip()
-                    if box and text:
+                    if box and text and box["width"] > 0 and box["height"] > 0:
                         button_boxes.append(
                             {
                                 "text": text,
@@ -121,9 +135,20 @@ async def collect_text_and_button_boxes(target_url: str | list[str]) -> dict:
                 text_count = await text_locator.count()
                 for i in range(text_count):
                     el = text_locator.nth(i)
-                    box = await el.bounding_box()
+                    if not await el.is_visible():
+                        continue
+                        
+                    box = await el.evaluate("""(node) => {
+                        const rect = node.getBoundingClientRect();
+                        return {
+                            x: rect.x + window.scrollX,
+                            y: rect.y + window.scrollY,
+                            width: rect.width,
+                            height: rect.height
+                        };
+                    }""")
                     text = (await el.text_content() or "").strip()
-                    if box and text:
+                    if box and text and box["width"] > 0 and box["height"] > 0:
                         text_boxes.append(
                             {
                                 "text": text,

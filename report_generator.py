@@ -27,13 +27,14 @@ def generate_teardown_report(image_path: str | list[str], bounding_boxes: list[d
 
     with TemporaryDirectory() as tmp_dir:
         tmp_dir_path = Path(tmp_dir)
-        segment_top = 0.0
-        for page_index, image_file in enumerate(image_files, start=1):
+        pdf_page_index = 1
+        
+        for image_file in image_files:
             image = Image.open(image_file).convert("RGB")
             image_width_px, image_height_px = image.size
-            segment_bottom = segment_top + float(image_height_px)
             draw = ImageDraw.Draw(image)
 
+            # Draw ALL bounding boxes onto the full image first!
             for box in normalized_boxes:
                 x = box.get("x")
                 y = box.get("y")
@@ -42,32 +43,37 @@ def generate_teardown_report(image_path: str | list[str], bounding_boxes: list[d
                 if x is None or y is None or width is None or height is None:
                     continue
 
-                x_val = float(x)
-                y_val = float(y)
-                width_val = float(width)
-                height_val = float(height)
-                if y_val + height_val <= segment_top or y_val >= segment_bottom:
-                    continue
-
-                local_y = y_val - segment_top
                 draw.rectangle(
-                    (x_val, local_y, x_val + width_val, local_y + height_val),
+                    (float(x), float(y), float(x) + float(width), float(y) + float(height)),
                     outline="red",
                     width=5,
                 )
 
-            marked_path = tmp_dir_path / f"marked_slice_{page_index:03d}.png"
-            image.save(marked_path)
-
-            if page_index > 1:
-                pdf.add_page()
-
+            # Calculate ideal slice height to fit the PDF page perfectly
             content_width_mm = pdf.w - pdf.l_margin - pdf.r_margin
-            pdf.set_font("Helvetica", "B", 12)
-            pdf.cell(0, 8, f"Screenshot {page_index}", new_x="LMARGIN", new_y="NEXT")
-            pdf.image(str(marked_path), x=pdf.l_margin, y=pdf.get_y(), w=content_width_mm)
+            content_height_mm = pdf.h - pdf.t_margin - pdf.b_margin - 10  # 10mm for the title cell
+            
+            # Ratio of PDF content height to width
+            aspect_ratio = content_height_mm / content_width_mm
+            slice_height_px = max(100, int(image_width_px * aspect_ratio))
+            
+            segment_top = 0
+            while segment_top < image_height_px:
+                segment_bottom = min(segment_top + slice_height_px, image_height_px)
+                slice_img = image.crop((0, segment_top, image_width_px, segment_bottom))
 
-            segment_top = segment_bottom
+                marked_path = tmp_dir_path / f"marked_slice_{pdf_page_index:03d}.png"
+                slice_img.save(marked_path)
+
+                if pdf_page_index > 1:
+                    pdf.add_page()
+
+                pdf.set_font("Helvetica", "B", 12)
+                pdf.cell(0, 8, f"Screenshot Part {pdf_page_index}", new_x="LMARGIN", new_y="NEXT")
+                pdf.image(str(marked_path), x=pdf.l_margin, y=pdf.get_y(), w=content_width_mm)
+
+                segment_top = segment_bottom
+                pdf_page_index += 1
 
     pdf.add_page()
     pdf.set_font("Helvetica", "", 12)
