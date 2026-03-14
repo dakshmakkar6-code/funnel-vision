@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/main.tsx","./server.ts","./scraper.ts","./vite.config.ts"],"errors":true,"version":"5.7.3"}
+{"root":["./src/app.tsx","./src/llmclient.ts","./src/main.tsx","./src/safejson.ts","./src/types.ts","./server.ts","./scraper.ts","./vite.config.ts"],"version":"5.7.3"}

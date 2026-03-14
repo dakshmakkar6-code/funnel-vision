@@ -1,6 +1,7 @@
 import { spawn } from 'child_process';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { safeParseJson } from './src/safeJson.js';
 
 // Resolve paths relative to this file (ESM-safe)
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -13,7 +14,9 @@ export async function scrapePage(url: string) {
   console.log(`[scraper] Spawning: ${PYTHON_EXE} ${SCRAPER_SCRIPT} "${url}"`);
   
   return new Promise((resolve, reject) => {
-    const pyProcess = spawn(PYTHON_EXE, [SCRAPER_SCRIPT, url]);
+    const pyProcess = spawn(PYTHON_EXE, [SCRAPER_SCRIPT, url], {
+      env: { ...process.env, PYTHONIOENCODING: "utf-8" },
+    });
     let stdout = '';
     let stderr = '';
 
@@ -33,12 +36,18 @@ export async function scrapePage(url: string) {
       }
 
       try {
-        // Find JSON in the stdout (handles potential noise)
-        const jsonMatch = stdout.match(/\{[\s\S]*\}/);
-        if (!jsonMatch) {
+        // Find JSON object (from first { to last }; handles leading noise)
+        const trimmed = stdout.trim();
+        const openIdx = trimmed.indexOf('{');
+        if (openIdx === -1) {
           throw new Error('No valid JSON found in scraper output');
         }
-        const data = JSON.parse(jsonMatch[0]);
+        const closeIdx = trimmed.lastIndexOf('}');
+        if (closeIdx === -1 || closeIdx < openIdx) {
+          throw new Error('No valid JSON object found in scraper output');
+        }
+        const jsonStr = trimmed.slice(openIdx, closeIdx + 1);
+        const data = safeParseJson(jsonStr);
         resolve(data);
       } catch (err: any) {
         console.error('[scraper] Output Parser error:', err.message);
