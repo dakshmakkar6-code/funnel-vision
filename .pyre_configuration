@@ -1,0 +1,12 @@
+{
+  "source_directories": [
+    "python_scraper",
+    "frontend/python_scripts"
+  ],
+  "search_path": [
+    "python_scraper/.venv/Lib/site-packages"
+  ],
+  "exclude": [
+    "**/node_modules/**"
+  ]
+}
