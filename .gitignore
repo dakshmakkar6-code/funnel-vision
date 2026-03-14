@@ -1,3 +1,30 @@
+# Environment files
 .env
 .env.*
 !.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+.pyre/
+
+# Node.js
+node_modules/
+dist/
+.next/
+
+# Large binaries / Artifacts
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.json
+!package.json
+!tsconfig.json
+!pyproject.toml
+!uv.lock
+!scrape_results.json
