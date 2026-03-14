@@ -21,7 +21,7 @@ async def scrape_page(url: str):
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
         # Using agentql.wrap_async though standard query features aren't used yet
-        page = await agentql.wrap_async(browser.new_page())
+        page = await agentql.wrap_async(await browser.new_page())  # type: ignore
         await page.goto(url, wait_until="networkidle")
         
         # Save screenshot to public directory relative to this script
@@ -29,7 +29,7 @@ async def scrape_page(url: str):
         public_dir.mkdir(parents=True, exist_ok=True)
         
         # Create a safe filename based on the URL
-        safe_name = "".join(c if c.isalnum() else "_" for c in url)[:30]
+        safe_name: str = "".join(c if c.isalnum() else "_" for c in url)[:30]
         screenshot_filename = f"screenshot-{safe_name}.png"
         screenshot_path = public_dir / screenshot_filename
         
